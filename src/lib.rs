@@ -14,7 +14,7 @@ assert_eq!(WordsCount {
     words: 18,
     characters: 31,
     whitespaces: 2,
-    cjk: 16,
+    cjk: 18,
 }, words_count::count("Rust是由 Mozilla 主導開發的通用、編譯型程式語言。"));
 ```
 
@@ -132,6 +132,8 @@ pub fn count<S: AsRef<str>>(s: S) -> WordsCount {
                     consecutive_dashes = 0;
 
                     if is_cjk_other(c) {
+                        count.cjk += 1;
+
                         continue;
                     } else if unicode_blocks::is_cjk(c) {
                         count.words += 1;
